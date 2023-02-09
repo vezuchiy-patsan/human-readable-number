@@ -3,11 +3,9 @@ module.exports = function toReadable (number) {
     function hundred(n) {
       let doublH, hundr, leftH, rightH, doubleStr, strHRet, oneH;
       hundr = n[2];
-      console.log("Сотня " + easyTO[hundr]);
       for(let str = 1; str >= 0; str--){
         if(n[str] > 0) {
           str == 1 ? doublH = parseInt((n.slice(0,1+str)).split('').reverse().join('')) : doublH = parseInt(n.slice(0,1+str));
-          console.log("Число " + doublH);
           break;
         }
       }
@@ -24,17 +22,14 @@ module.exports = function toReadable (number) {
           doublH = easyTO[doublH];
           return easyTO[hundr] + " " + easyTO["100"] + " " + doublH;
       }
-      console.log(oneH + "  " + doublH)
       if(doublH != undefined){
         for(const key of easyTO.keys()){
           if(key < parseInt(doublH) && (key+1) == parseInt(doublH)){
-            console.log("key < num", key)
            for (let i = key; i <= key; i--) {
             if(i % 10 == 0){
               leftH = i;
               rightH = leftH + 10;
               doubleStr = easyTO[leftH] + " " + easyTO[numStr[0]];
-              console.log(doubleStr + " Промежутки");
               break;
             }
             
@@ -63,7 +58,6 @@ module.exports = function toReadable (number) {
     } 
     for(const key of easyTO.keys()){
       if(key < num && (key+1) == num){
-        console.log("key < num", key)
        for (let i = key; i <= key; i--) {
         if(i % 10 == 0){
           left = i;
