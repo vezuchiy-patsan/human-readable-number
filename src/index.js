@@ -1,9 +1,58 @@
 module.exports = function toReadable (number) {
   function recNum(num) {
+    function hundred(n) {
+      let doublH, hundr, leftH, rightH, doubleStr, strHRet, oneH;
+      hundr = n[2];
+      console.log("Сотня " + easyTO[hundr]);
+      for(let str = 1; str >= 0; str--){
+        if(n[str] > 0) {
+          str == 1 ? doublH = parseInt((n.slice(0,1+str)).split('').reverse().join('')) : doublH = parseInt(n.slice(0,1+str));
+          console.log("Число " + doublH);
+          break;
+        }
+      }
+      if(parseInt(doublH) < 20) {
+        if(parseInt(doublH) < 16){
+          oneH = easyTO[parseInt(doublH)];
+          return  easyTO[hundr] + " " + easyTO["100"] + " " + oneH;
+        }else{
+          parseInt(doublH) == 18 ? oneH = "eighteen" : oneH = easyTO[`${doublH-10}`] + "teen";
+          return  easyTO[hundr] + " " + easyTO["100"] + " " + oneH;
+        }
+      }
+      if(parseInt(doublH) % 10 == 0){
+          doublH = easyTO[doublH];
+          return easyTO[hundr] + " " + easyTO["100"] + " " + doublH;
+      }
+      console.log(oneH + "  " + doublH)
+      if(doublH != undefined){
+        for(const key of easyTO.keys()){
+          if(key < parseInt(doublH) && (key+1) == parseInt(doublH)){
+            console.log("key < num", key)
+           for (let i = key; i <= key; i--) {
+            if(i % 10 == 0){
+              leftH = i;
+              rightH = leftH + 10;
+              doubleStr = easyTO[leftH] + " " + easyTO[numStr[0]];
+              console.log(doubleStr + " Промежутки");
+              break;
+            }
+            
+           }
+           break; 
+          }
+        }
+        return easyTO[hundr] + " " + easyTO["100"] + " " + doubleStr
+      }else{
+        return easyTO[hundr] + " " + easyTO["100"]
+      }
+
+    }
+    let numRec = num;
     let numRet, left,right;
     const numStr = num.toString().split('').reverse().join('');
-    if (num == 20) {
-      console.log(numStr, num%10);
+    if(numStr.length > 2){
+      return hundred(numStr);
     }
     if(num < 20) {
       num == 18 ? numRet = "eighteen" : numRet = easyTO[numStr[0]] + "teen";
@@ -12,7 +61,6 @@ module.exports = function toReadable (number) {
     if(num % 10 == 0){
         return easyTO[num];
     } 
-    
     for(const key of easyTO.keys()){
       if(key < num && (key+1) == num){
         console.log("key < num", key)
